@@ -44,7 +44,7 @@ const breeds = [
   { name: "Coton de Tulear" },
   { name: "Havanese" },
   { name: "Lowchen" },
-  { name: "Maltese" }
+  { name: "Maltese" },
 ];
 
 const doggos = JSON.parse(
@@ -58,22 +58,22 @@ export const _dogs = doggos.animals;
 const mock = {
   breeds: jest.fn(() => {
     return {
-      then: callback =>
+      then: (callback) =>
         act(() => {
           callback({
-            breeds
+            breeds,
           });
-        })
+        }),
     };
   }),
   animals: jest.fn(() => {
     return {
-      then: callback =>
+      then: (callback) =>
         act(() => {
           callback(doggos);
-        })
+        }),
     };
-  })
+  }),
 };
 
 export default mock;
@@ -125,7 +125,7 @@ Run this test via `npx jest`. If you seeit work, then place `"test": "jest"` in 
 Let's add another test.
 
 ```javascript
-// beneat the last expect
+// beneath the last expect
 expect(pet.breeds).toHaveBeenCalled();
 const breedDropdown = getByTestId("use-dropdown-breed");
 expect(breedDropdown.children.length).toEqual(_breeds.length + 1);
@@ -157,7 +157,7 @@ function requestPets() {
     .animals({
       location,
       breed,
-      type: animal
+      type: animal,
     })
     .then(({ animals }) => {
       setPets(animals || []);
@@ -168,7 +168,7 @@ function requestPets() {
 Here we're simulating a submit event to search for pets and then checking it properly called the API and then renders the correct animal list length. Let's go add the testid we need in Results.js
 
 ```javascript
-// outtermost div
+// outermost div
 <div className="search" data-testid="search-results">
 ```
 
